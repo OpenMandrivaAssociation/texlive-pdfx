@@ -1,6 +1,6 @@
 Name:		texlive-pdfx
 Version:	50338
-Release:	1
+Release:	2
 Summary:	PDF/X-1a and PDF/A-1b support for pdfTeX
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/pdfx

@@ -1,44 +1,22 @@
-Name:		texlive-pdfx
-Version:	71681
-Release:	1
-Summary:	PDF/X-1a and PDF/A-1b support for pdfTeX
+%global tl_name pdfx
+%global tl_revision 79618
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.6.5f
+Release:	%{tl_revision}.1
+Summary:	PDF/X and PDF/A support for pdfTeX, LuaTeX and XeTeX
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/pdfx
-License:	LPPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/pdfx.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/pdfx.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/pdfx.source.r%{version}.tar.xz
+License:	lppl1.3
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/pdfx.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/pdfx.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/pdfx.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The package helps LaTeX users to create PDF/X-1a and PFD/A-1b
-compliant pdf documents with pdfTeX.
+The package helps LaTeX users to create PDF/X, PFD/A and other
+standards-compliant PDF documents with pdfTeX, LuaTeX and XeTeX.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/pdfx
-%doc %{_texmfdistdir}/doc/latex/pdfx
-#- source
-%doc %{_texmfdistdir}/source/latex/pdfx
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
